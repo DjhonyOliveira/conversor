@@ -42,7 +42,9 @@
                             <option value="" selected disabled>Selecione...</option>
                             <?php if(!empty($moedas)): ?>
                                 <?php foreach($moedas as $nome => $valor): ?>
-                                    <option value="<?= $valor ?>"><?= $nome ;?></option>
+                                    <?php if($valor != 'BTC'): ?>
+                                        <option value="<?= $valor ?>"><?= $nome ;?></option>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </select>
@@ -57,7 +59,13 @@
             </form>
         </div>
         <div class="result container">
-            <h4 class="text-center pt-5">Resultados</h4>
+
+            <div id="alertError" class="alert alert-danger alert-dismissible fade" role="alert">
+                <strong>Erro!</strong> Erro ao realizar a conversão, tente novamente mais tarde.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <h4 class="text-center pt-1">Resultados</h4>
             <div class="conversao form-floating mt-2"></div>
             <div class="qtdConverter form-floating mt-2"></div>
             <div class="hightValue form-floating mt-2"></div>
