@@ -36,7 +36,7 @@ extension=curl
 Clone este repositório e coloque-o dentro de um diretório chamado conversor
 
 ```bash
-git clone <URL_DO_REPOSITORIO> conversor
+git clone https://github.com/DjhonyOliveira/conversor.git conversor
 ```
 
 ### 4. Movendo o Projeto para o Diretório do XAMPP
