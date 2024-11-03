@@ -200,6 +200,9 @@ $(document).ready(function(){
     function validaOpcoes(){
         let moeda1 = $('#moeda1').val();
 
+        $('#moeda2 option[value="JPY"]').prop('disabled', false);
+        $('#moeda2 option[value="ARS"]').prop('disabled', false);
+
         if(moeda1 == 'BTC'){
             $('#moeda2 option[value="JPY"]').prop('disabled', true);
             $('#moeda2 option[value="ARS"]').prop('disabled', true);
