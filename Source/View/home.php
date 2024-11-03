@@ -49,14 +49,19 @@
                         <label class="floatingSelect" for="moeda2" name="moeda2">Escolha a Moeda 2</label>
                     </div>
                 </div>
+                <div class="quantidade form-floating mt-4">
+                    <input type="text" class="form-control" id="quantidade" name="quantidade">
+                    <label class="floatingInput" for="quantidade" name="quantidade">Converter um valor X para a moeda selecionada</label>
+                </div>
                 <button class="btn btn-primary mt-5" type="submit" id="submit">Converter</button>
             </form>
         </div>
         <div class="result container">
             <h4 class="text-center pt-5">Resultados</h4>
-            <div class="conversao form-floating"></div>
-            <div class="hightValue form-floating"></div>
-            <div class="minValue form-floating"></div>
+            <div class="conversao form-floating mt-2"></div>
+            <div class="qtdConverter form-floating mt-2"></div>
+            <div class="hightValue form-floating mt-2"></div>
+            <div class="minValue form-floating mt-2"></div>
         </div>
     </section>
     <footer>

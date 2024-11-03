@@ -37,7 +37,20 @@ class Web extends Controller
      */
     public function realizaConversao(array $request): void
     {
-        $xRetorno = $this->getModelConversor()->converteDados($request);
+        $xRetorno       = $this->getModelConversor()->converteDados($request);
+        $valorCalculado = 0;
+
+        if(!empty($request['valorSelecionado'])){
+            foreach($xRetorno as $indice => $valor){
+                foreach($valor as $i =>$v){
+                    if($i == 'bid'){
+                        $valorCalculado = (int) $request['valorSelecionado'] * (float) $v;
+                    }
+                }
+            }
+
+            $xRetorno['valorCalculado'] = $valorCalculado;
+        }
 
         if($xRetorno){
             echo json_encode($xRetorno);

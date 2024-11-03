@@ -7,12 +7,18 @@ $('#moeda1, #moeda2').change(validaSelecao);
 $('form').on('submit', function(ev) {
     ev.preventDefault();
 
-    let dadosForm = null;
-    let moeda1    = $('#moeda1').val();
-    let moeda2    = $('#moeda2').val();
+    let dadosForm        = null;
+    let moeda1           = $('#moeda1').val();
+    let moeda2           = $('#moeda2').val();
+    let valorSelecionado = $('#quantidade').val();
 
     if(moeda1 != undefined && moeda2 != undefined){
-        dadosForm = {moeda1, moeda2};
+        if(valorSelecionado != undefined){
+            dadosForm = {moeda1, moeda2, valorSelecionado};
+        }
+        else {
+            dadosForm = {moeda1, moeda2};
+        }
         moedasSolicitadas = moeda1 + moeda2;
     }
     else{
@@ -54,20 +60,26 @@ function submit(parametros){
 
 // realiza o tratamento dos dados recebidos do backend
 function trataDados(response){
-    let moeda1     = response[moedasSolicitadas].name.split('/')[0];
-    let moeda2     = response[moedasSolicitadas].name.split('/')[1];
-    let conversao  = response[moedasSolicitadas].bid;
-    let menorValor = response[moedasSolicitadas].low;
-    let maiorValor = response[moedasSolicitadas].high;
+    let moeda1          = response[moedasSolicitadas].name.split('/')[0];
+    let moeda2          = response[moedasSolicitadas].name.split('/')[1];
+    let conversao       = response[moedasSolicitadas].bid;
+    let menorValor      = response[moedasSolicitadas].low;
+    let maiorValor      = response[moedasSolicitadas].high;
+    let valorConvertido = 0;
 
-    montaRetorno(moeda1, moeda2, conversao, menorValor, maiorValor);
+    if(response['valorCalculado'] != undefined){
+        valorConvertido = response['valorCalculado']
+    }
+
+    montaRetorno(moeda1, moeda2, conversao, menorValor, maiorValor, valorConvertido);
 };
 
 // chama as funções para montar o retorno no frontend
-function montaRetorno(moeda1, moeda2, conversao, menorValor, maiorValor){
+function montaRetorno(moeda1, moeda2, conversao, menorValor, maiorValor, valorConvertido){
     criaCampoConversaoEntreMoedas(moeda1, moeda2, conversao);
     criaMaiorValorPeriodo(moeda1, moeda2, maiorValor);
     criaMenorValorPeriodo(moeda1, moeda2, menorValor);
+    criaCalculaValorSolicitado(moeda1, moeda2, valorConvertido);
 };
 
 // cria o input com o valor de conversão de uma moeda para a outra
@@ -110,7 +122,6 @@ function criaMaiorValorPeriodo(moeda1, moeda2, maiorValor){
 
     $('.hightValue').append(input);
     $('.hightValue').append(label);
-    
 }
 
 // cria o input validando o menor valor atingido no periodo
@@ -132,4 +143,24 @@ function criaMenorValorPeriodo(moeda1, moeda2, menorValor){
 
     $('.minValue').append(input);
     $('.minValue').append(label);
+}
+
+function criaCalculaValorSolicitado(moeda1, moeda2, valorConvertido){
+    let label = document.createElement('label');
+    let input = document.createElement('input');
+
+    label.name      = 'convertValue';
+    label.innerText = 'o valor solicitado para a conversão entre ' + moeda1 + ' e ' + moeda2 + ' é ';
+    label.className = 'floatingInputValue';
+    label.setAttribute('for', 'convertValue');
+
+    input.type      = 'text';
+    input.disabled  = true;
+    input.id        = 'convertValue';
+    input.name      = 'convertValue';
+    input.className = 'form-control' ;
+    input.value     = parseFloat(valorConvertido).toFixed(2);
+
+    $('.qtdConverter').append(input);
+    $('.qtdConverter').append(label); 
 }
