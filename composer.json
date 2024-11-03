@@ -1,0 +1,30 @@
+{
+    "name": "unidavi/conversaodemoeda",
+    "version": "1.0.0",
+    "description": "Conversão de Moeda",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Djonatan R. de Oliveira",
+            "email": "Djonatan.oliveira@unidavi.edu.br",
+            "role": "developer"
+        }
+    ],
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "autoload": {
+        "psr-4": {
+            "Source\\": "Source/"
+        },
+        "files": [
+            "Source/config.php"
+        ]
+    },
+    "require": {
+        "php": "^8.0",
+        "league/plates": "3.*",
+        "coffeecode/router": "2.0.*"
+    }
+}
