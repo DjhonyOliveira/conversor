@@ -53,14 +53,14 @@
                 </div>
                 <div class="quantidade form-floating mt-4">
                     <input type="text" class="form-control" id="quantidade" name="quantidade">
-                    <label class="floatingInput" for="quantidade" name="quantidade">Converter um valor X para a moeda selecionada</label>
+                    <label class="floatingInput" for="quantidade" name="quantidade">Valor a ser convertido</label>
                 </div>
                 <button class="btn btn-primary mt-5" type="submit" id="submit">Converter</button>
             </form>
         </div>
         <div class="result container">
 
-            <div id="alertError" class="alert alert-danger alert-dismissible fade" role="alert">
+            <div id="alertError" class="alert alert-danger alert-dismissible fade mt-3" role="alert">
                 <strong>Erro!</strong> Erro ao realizar a conversão, tente novamente mais tarde.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

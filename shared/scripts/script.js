@@ -51,6 +51,9 @@ $(document).ready(function(){
     function validaSelecao() {
         let moeda1 = $('#moeda1').val();
         let moeda2 = $('#moeda2').val();
+
+        validaOpcoes();
+
         $("#customAlert").removeClass("show").fadeIn();
 
         if (moeda1 && moeda1 === moeda2) {
@@ -79,6 +82,10 @@ $(document).ready(function(){
 
     // realiza o tratamento dos dados recebidos do backend
     function trataDados(response){
+        if(response.status == 404){
+            $("#alertError").addClass("show").fadeIn();
+        }
+
         jaSubmeteu = true;
 
         let moeda1          = response[moedasSolicitadas].name.split('/')[0];
@@ -134,12 +141,13 @@ $(document).ready(function(){
         label.className = 'floatingInputValue';
         label.setAttribute('for', 'hightValue');
 
-        input.type      = 'text';
-        input.disabled  = true;
-        input.name      = 'hightValue';
-        input.id        = 'hightValue';
-        input.className = 'form-control';
-        input.value     = parseFloat(maiorValor).toFixed(2);
+        input.type        = 'text';
+        input.disabled    = true;
+        input.name        = 'hightValue';
+        input.id          = 'hightValue';
+        input.className   = 'form-control';
+        input.value       = parseFloat(maiorValor).toFixed(2);
+        input.style.color = '#0b5ed7'
 
         $('.hightValue').append(input);
         $('.hightValue').append(label);
@@ -155,12 +163,13 @@ $(document).ready(function(){
         label.className = 'floatingInputValue';
         label.setAttribute('for', 'minValue');
 
-        input.type      = 'text';
-        input.disabled  = true;
-        input.id        = 'minValue';
-        input.name      = 'minValue';
-        input.className = 'form-control' ;
-        input.value     = parseFloat(menorValor).toFixed(2);
+        input.type        = 'text';
+        input.disabled    = true;
+        input.id          = 'minValue';
+        input.name        = 'minValue';
+        input.className   = 'form-control' ;
+        input.value       = parseFloat(menorValor).toFixed(2);
+        input.style.color = '#0b5ed7'
 
         $('.minValue').append(input);
         $('.minValue').append(label);
@@ -176,14 +185,28 @@ $(document).ready(function(){
         label.className = 'floatingInputValue';
         label.setAttribute('for', 'convertValue');
 
-        input.type      = 'text';
-        input.disabled  = true;
-        input.id        = 'convertValue';
-        input.name      = 'convertValue';
-        input.className = 'form-control';
-        input.value     = parseFloat(valorConvertido).toFixed(2);
+        input.type        = 'text';
+        input.disabled    = true;
+        input.id          = 'convertValue';
+        input.name        = 'convertValue';
+        input.className   = 'form-control';
+        input.value       = parseFloat(valorConvertido).toFixed(2);
+        input.style.color = '#0b5ed7'
 
         $('.qtdConverter').append(input);
         $('.qtdConverter').append(label); 
     };
+
+    function validaOpcoes(){
+        let moeda1 = $('#moeda1').val();
+
+        if(moeda1 == 'BTC'){
+            $('#moeda2 option[value="JPY"]').prop('disabled', true);
+            $('#moeda2 option[value="ARS"]').prop('disabled', true);
+        }
+
+        if(moeda1 == 'ARS'){
+            $('#moeda2 option[value="JPY"]').prop('disabled', true);
+        }
+    }
 });
