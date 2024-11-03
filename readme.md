@@ -20,6 +20,13 @@ choco install php
 choco install composer
 ```
 
+> **Nota:** Caso não tenha o "Chocolatey" instalado em sua maquina, basta executar o comando a baixo:
+
+```bash
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+ Posteriormente será possivel executar os comandos a cima citados
+
 ### 2. Ativando o cURL no PHP
 Verifique se a extensão cURL está habilitada no seu PHP. Para fazer isso:
 
